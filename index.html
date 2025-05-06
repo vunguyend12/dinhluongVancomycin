@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Phiếu lấy mẫu Vancomycin</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    td, th {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .section-title {
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .note {
+      font-size: 12px;
+      color: #333;
+    }
+    .btn-submit {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #d1dbe8;
+      border: none;
+      cursor: pointer;
+    }
+    .highlight {
+      background-color: #f9f9a9;
+    }
+    .orange {
+      background-color: #ffe0b2;
+    }
+    .blue {
+      background-color: #cce5ff;
+    }
+    .pink {
+      background-color: #f8d7da;
+    }
+    input[type="time"]::-webkit-outer-spin-button,
+    input[type="time"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin-left: -10px; /* Điều chỉnh khoảng cách */
+    }
+
+    /* Thêm style cho phần input */
+    input[type="time"] {
+      padding-left: 23px; /* Đảm bảo có khoảng cách cho văn bản */
+    }
+    
+  </style>
+</head>
+<body onload="resizeWindow()">
+  <div class="section-title">PHIẾU LẤY MẪU VANCOMYCIN</div>
+
+  <form id="vancomycinForm">
+    <table>
+      <tr>
+        <td>Ngày</td>
+        <td><input type="date" id="ngay" name="ngay" required></td>
+        <td>Khoa</td>
+        <td>
+          <label for="khoa">Chọn khoa:</label>
+          <select id="khoa" name="khoa">
+            <option value="">-- Vui lòng chọn khoa --</option>
+            <option value="capcuu">Cấp cứu</option>
+            <option value="bongchinhtruc">Bỏng Chính trực</option>
+            <option value="hohap1">Hô hấp 1</option>
+            <option value="hstc_cd">HSTC và CĐ</option>
+            <option value="hstc_nhiem">HSTC Nhiễm</option>
+            <option value="hsss">HSSS</option>
+            <option value="hstm">HSTM</option>
+            <option value="timmach">Tim mạch</option>
+            <option value="ubhh">UBHH</option>
+            <option value="noi1">Nội 1</option>
+            <option value="noi2">Nội 2</option>
+            <option value="noi3">Nội 3</option>
+            <option value="noitonghop">Nội tổng hợp</option>
+            <option value="ngoaitonghop">Ngoại tổng hợp</option>
+            <option value="ngoaitk">Ngoại thần kinh</option>
+            <option value="nhiem">Nhiễm</option>
+            <option value="sosinh">Sơ sinh</option>
+            <option value="tieuhóa">Tiêu hóa</option>
+            <option value="lienchuyenkhoa">Liên chuyên khoa</option>
+            <option value="than_noitiet">Thận nội tiết</option>
+            <option value="thankinh">Thần kinh</option>
+            <option value="thannieu">Thận niệu</option>
+            <option value="ganmattuy">Gan mật tuỵ</option>
+            <option value="pthstc_tm">PTHSTC Tim mạch lồng ngực</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Mã BN</td>
+        <td><input name="maBN" required></td>
+        <td>Ngày sinh</td>
+        <td><input type="date" id="ngaySinh" name="ngaySinh" required></td>
+      </tr>
+      <tr>
+        <td>Tên BN</td>
+        <td><input name="tenBN" required></td>
+        <td>Tên bác sĩ</td>
+        <td><input name="tenBS" required></td>
+      </tr>
+      <tr>
+        <td>Khoảng cách liều</td>
+        <td class="blue">
+        	<select type = "number" id="kcLieu" name="kcLieu" required>
+        		<option value="6">6 giờ</option>
+                <option value="8">8 giờ</option>
+                <option value="12">12 giờ</option>
+                <option value="18">18 giờ</option>
+                <option value="24">24 giờ</option>
+        </td>
+        <td colspan="2" class="pink">Đảm bảo khoảng cách liều truyền cách đều</td>
+      </tr>
+    </table>
+
+    <table>
+      <tr>
+        <th>Thời điểm</th>
+        <th>Bác sĩ ra y lệnh</th>
+        <th>Thời điểm</th>
+        <th>Điều dưỡng thực hiện y lệnh thực tế</th>
+      </tr>
+      <tr>
+        <td>Bắt đầu truyền lúc:</td>
+        <td class="highlight"><input type="time" id="bdTruyenBS" name="bdTruyenBS" required></td>
+        <td>Bắt đầu truyền lúc:</td>
+        <td><input type="time" id="bdTruyenDD" name="bdTruyenDD" required></td>
+      </tr>
+      <tr>
+        <td>Kết thúc truyền lúc</td>
+        <td class="highlight"><input type="time" id="ktTruyenBS" name="ktTruyenBS" required></td>
+        <td>Kết thúc truyền lúc</td>
+        <td><input type="time" id="ktTruyenDD" name="ktTruyenDD" required></td>
+      </tr>
+      <tr>
+        <td>Liều kế tiếp lúc</td>
+        <td class="highlight"><input type = "time" id="lieuTiepBS" name="lieuTiepBS" readonly></td>
+        <td>Liều kế tiếp lúc</td>
+        <td><input type = "time" id="lieuTiepDD" name="lieuTiepDD" required></td>
+      </tr>
+      <tr>
+        <td>Đo đỉnh lúc</td>
+        <td><input type ="time" id="doDinhBS1" name="doDinhBS1" readonly> - <input type ="time" id="doDinhBS2" name="doDinhBS2" readonly></td>
+        <td>Đo đỉnh lúc</td>
+        <td><input type ="time" id="doDinhDD" name="doDinhDD" required></td>
+      </tr>
+      <tr>
+        <td>Đo đáy lúc</td>
+        <td><input type ="time" id="doDayBS1" name="doDayBS1" readonly> - <input type ="time" id="doDayBS2" name="doDayBS2" readonly></td>
+        <td>Đo đáy lúc</td>
+        <td><input type ="time" id="doDayDD" name="doDayDD" required></td>
+      </tr>
+    </table>
+
+    <div class="note">
+      <p><b>Lưu ý khi lấy mẫu</b><br>
+      - Không đo: ở ngày đầu tiên sử dụng, trong vòng 1h sau khi truyền thuốc, trong vòng 12h sau chạy thận nhân tạo<br>
+      - Đo khi bệnh nhân đạt trạng thái ổn định (liều dùng không thay đổi, chức năng thận ổn định…)<br>
+      - Đảm bảo tuân thủ và ghi chép chính xác thời gian thực tế.<br>
+      - Thời gian truyền – Khoảng cách liều đều nhau – Thời điểm lấy mẫu rõ ràng.<br>
+      - Không lấy mẫu tại đường truyền chính đang dùng để truyền vancomycin, tránh nhầm lẫn kết quả do lấy mẫu tại vị trí gần đường truyền.</p>
+    </div>
+
+    <button type="submit" class="btn-submit">GỬI</button>
+    <div id="result"></div>
+  </form>
+
+  <script>
+  	function resizeWindow() {
+      if (window.innerWidth < 1000 || window.innerHeight < 800) {
+        window.open(window.location.href, '_blank', 'width=900,height=1200');
+      }
+    }
+  
+  	const today = new Date().toISOString().split('T')[0];
+    document.getElementById('ngay').value = today;
+    document.getElementById('ngaySinh').value = '2000-01-01';
+    
+    function getCurrentTime() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      return `${hours}:${minutes}`;
+    }
+
+
+  	document.getElementById('bdTruyenBS').value = getCurrentTime();
+ 	document.getElementById('bdTruyenDD').value = getCurrentTime();
+    //document.getElementById('ktTruyenBS').value = getCurrentTime();
+ 	//document.getElementById('ktTruyenDD').value = getCurrentTime();
+    //document.getElementById('lieuTiepDD').value = getCurrentTime();
+    //document.getElementById('doDinhDD').value = getCurrentTime();
+    //document.getElementById('doDayDD').value = getCurrentTime();
+    
+    function tinhLieuKeTiep() {
+      let bdTruyenBS = document.getElementById('bdTruyenBS').value;
+      let kcLieu = document.getElementById('kcLieu').value;
+
+      if (!bdTruyenBS || !kcLieu) {
+        document.getElementById('lieuTiepBS').value = "Vui lòng nhập thời điểm bắt đầu truyền và khoảng cách liều!";
+        return;
+      }
+
+      let timeParts = bdTruyenBS.split(":");
+      let hours = parseInt(timeParts[0]);
+      let minutes = parseInt(timeParts[1]);
+
+      let totalMinutes = (hours * 60 + minutes) + kcLieu * 60;
+
+      let lieuTiepBSHours = Math.floor(totalMinutes / 60);
+      let lieuTiepBSMinutes = totalMinutes % 60;
+      lieuTiepBSHours = lieuTiepBSHours % 24;
+      
+      let doDayBS1Hours = Math.floor((totalMinutes - 30) / 60);
+      let doDayBS1Minutes = (totalMinutes - 30) % 60;
+      doDayBS1Hours = doDayBS1Hours % 24;
+      
+      let doDayBS2Hours = Math.floor((totalMinutes - 1) / 60);
+      let doDayBS2Minutes = (totalMinutes - 1) % 60;
+      doDayBS2Hours = doDayBS2Hours % 24;
+
+      const formattedTime1 = `${String(lieuTiepBSHours).padStart(2, '0')}:${String(lieuTiepBSMinutes).padStart(2, '0')}`;
+      const formattedTime2 = `${String(doDayBS1Hours).padStart(2, '0')}:${String(doDayBS1Minutes).padStart(2, '0')}`;
+      const formattedTime3 = `${String(doDayBS2Hours).padStart(2, '0')}:${String(doDayBS2Minutes).padStart(2, '0')}`;
+
+
+      document.getElementById('lieuTiepBS').value = formattedTime1;
+      document.getElementById('doDayBS1').value = formattedTime2;
+      document.getElementById('doDayBS2').value = formattedTime3;
+    };
+    
+    function tinhDoDinh() {
+      let ktTruyenBS = document.getElementById('ktTruyenBS').value;
+
+      if (!ktTruyenBS) {
+        document.getElementById('doDinhBS1').value = "Vui lòng nhập thời điểm kết thúc truyền!";
+        return;
+      }
+
+      let timeParts = ktTruyenBS.split(":");
+      let hours = parseInt(timeParts[0]);
+      let minutes = parseInt(timeParts[1]);
+
+      let totalMinutes = (hours * 60 + minutes);
+
+      let doDinhBS1Hours = Math.floor((totalMinutes + 60)/ 60);
+      let doDinhBS1Minutes = (totalMinutes + 60) % 60;
+      doDinhBS1Hours = doDinhBS1Hours % 24;
+      
+      let doDinhBS2Hours = Math.floor((totalMinutes + 120)/ 60);
+      let doDinhBS2Minutes = (totalMinutes + 120) % 60;
+      doDinhBS2Hours = doDinhBS2Hours % 24;
+
+      const formattedTime1 = `${String(doDinhBS1Hours).padStart(2, '0')}:${String(doDinhBS1Minutes).padStart(2, '0')}`;
+      const formattedTime2 = `${String(doDinhBS2Hours).padStart(2, '0')}:${String(doDinhBS2Minutes).padStart(2, '0')}`;
+
+
+      document.getElementById('doDinhBS1').value = formattedTime1;
+      document.getElementById('doDinhBS2').value = formattedTime2;
+    };
+        
+    document.getElementById('bdTruyenBS').addEventListener('input', tinhLieuKeTiep);
+	document.getElementById('kcLieu').addEventListener('input', tinhLieuKeTiep);
+    document.getElementById('ktTruyenBS').addEventListener('input', tinhDoDinh);
+
+
+    document.getElementById("vancomycinForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+
+      fetch("https://script.google.com/macros/s/AKfycbzbxvAICuYWUhkPLPit3Jdqm5adtAkgKMCxYenToA_6xbpNfLp3adPtdbaA2IIZtn4/exec", { 
+        method: "POST",
+        body: formData
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          document.getElementById("result").innerText = "✅ Gửi thành công. Kết quả: " + data.message;
+        } else {
+          document.getElementById("result").innerText = "❌ Gửi thất bại: " + (data.message || "Lỗi không rõ");
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        document.getElementById("result").innerText = "❌ Có lỗi xảy ra khi gửi.";
+      });
+    });
+
+  </script>
+</body>
+</html>
