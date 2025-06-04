@@ -169,15 +169,15 @@
     </table>
 
     <div class="note">
-      <p><b>Lưu ý khi lấy mẫu</b><br>
-      - Không đo: ở ngày đầu tiên sử dụng, trong vòng 1h sau khi truyền thuốc, trong vòng 12h sau chạy thận nhân tạo<br>
-      - Đo khi bệnh nhân đạt trạng thái ổn định (liều dùng không thay đổi, chức năng thận ổn định…)<br>
-      - Đảm bảo tuân thủ và ghi chép chính xác thời gian thực tế.<br>
-      - Thời gian truyền – Khoảng cách liều đều nhau – Thời điểm lấy mẫu rõ ràng.<br>
-      - Không lấy mẫu tại đường truyền chính đang dùng để truyền vancomycin, tránh nhầm lẫn kết quả do lấy mẫu tại vị trí gần đường truyền.</p>
+      <p><b>Lưu ý khi lấy mẫu</b></p>
+      <label><input type="checkbox" class="luu-y" > Đảm bảo khoảng cách liều đều nhau</label><br>
+      <label><input type="checkbox" class="luu-y" > Không đo vào ngày đầu tiên dùng thuốc hoặc ngày đầu tiên chỉnh liều</label><br>
+      <label><input type="checkbox" class="luu-y" > Đảm bảo không lấy mẫu tại đường truyền Vancomycin.</label><br>
     </div>
 
+    </br>
     <button type="submit" class="btn-submit">GỬI</button>
+    </br>
     <div id="result"></div>
   </form>
 
@@ -200,10 +200,10 @@
     }
 
 
-  	document.getElementById('bdTruyenBS').value = getCurrentTime();
- 	document.getElementById('bdTruyenDD').value = getCurrentTime();
+    document.getElementById('bdTruyenBS').value = getCurrentTime();
+    document.getElementById('bdTruyenDD').value = getCurrentTime();
     //document.getElementById('ktTruyenBS').value = getCurrentTime();
- 	//document.getElementById('ktTruyenDD').value = getCurrentTime();
+ 	  //document.getElementById('ktTruyenDD').value = getCurrentTime();
     //document.getElementById('lieuTiepDD').value = getCurrentTime();
     //document.getElementById('doDinhDD').value = getCurrentTime();
     //document.getElementById('doDayDD').value = getCurrentTime();
@@ -276,13 +276,22 @@
     };
         
     document.getElementById('bdTruyenBS').addEventListener('input', tinhLieuKeTiep);
-	document.getElementById('kcLieu').addEventListener('input', tinhLieuKeTiep);
+	  document.getElementById('kcLieu').addEventListener('input', tinhLieuKeTiep);
     document.getElementById('ktTruyenBS').addEventListener('input', tinhDoDinh);
 
 
     document.getElementById("vancomycinForm").addEventListener("submit", function(e) {
       e.preventDefault();
       const formData = new FormData(e.target);
+
+      const checkboxes = document.querySelectorAll(".luu-y");
+      const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+
+      if (!allChecked) {
+        e.preventDefault();
+        alert("Vui lòng đọc kỹ và đánh dấu đủ tất cả các mục tại phần: Lưu ý khi lấy mẫu trước khi nhấn nút GỬI.");
+        return;
+      }
 
       fetch("https://script.google.com/macros/s/AKfycbzbxvAICuYWUhkPLPit3Jdqm5adtAkgKMCxYenToA_6xbpNfLp3adPtdbaA2IIZtn4/exec", { 
         method: "POST",
@@ -291,8 +300,10 @@
       .then(res => res.json())
       .then(data => {
         if (data.success) {
+          alert("Gửi dữ liệu thành công");
           document.getElementById("result").innerText = "✅ Gửi thành công. Kết quả: " + data.message;
         } else {
+          alert("Gửi dữ liệu thất bại");
           document.getElementById("result").innerText = "❌ Gửi thất bại: " + (data.message || "Lỗi không rõ");
         }
       })
